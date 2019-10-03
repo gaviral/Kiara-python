@@ -15,6 +15,8 @@ PYTHON = "python"
 REACT = "react"
 lang_mode = NO_LANG
 
+SEARCH_WORDS = ['search', 'when', 'why', 'how', 'Which', 'what', 'whose', 'who', 'where', 'whether', 'is', 'does', 'do']
+
 SUCCESS = 0
 UNRECOGNIZED_COMMAND_ERROR = -1
 
@@ -75,29 +77,31 @@ def say(words, file='tts.mp3'):
 chrome_handler: WebDriver = webdriver.Chrome('C:/chromedriver_win32/chromedriver.exe')
 
 
-def handle_command(mode, words):
+def handle_command(mode, cmd_str):
     global lang_mode
-    if len(words)
-    search_words = ['search', 'when', 'why', 'how', 'Which', 'what', 'whose', 'who', 'where', 'whether', 'is', 'does', 'do']
-    first_word = words.split(' ', 1)[0]
-    rest_words = words.split(" ", 1)[1:][0]
-    if first_word in search_words:
-        extracted_s_text = rest_words if first_word == "search" else words
+
+    words = cmd_str.split(' ', 1)
+
+    first_word = words[0]
+    rest_words = words[1:][0] if len(words) > 1 else None
+
+    if first_word in SEARCH_WORDS:
+        extracted_s_text = rest_words if first_word == "search" else cmd_str
         search_text = f'{lang_mode} {extracted_s_text}'
         search_url = f'{SEARCH_TAB_URL} {search_text}'
         chrome_handler.get(search_url)
         print(f'searched: {search_text}')
 
-    elif "mode" in words:
-        if "python" in words:
+    elif "mode" in cmd_str:
+        if "python" in cmd_str:
             lang_mode = PYTHON
-        elif "react" in words:
+        elif "react" in cmd_str:
             lang_mode = REACT
-        elif "no" in words or "normal" in words:
+        elif "no" in cmd_str or "normal" in cmd_str:
             lang_mode = NO_LANG
         print(f'Language Mode: {lang_mode}')
     else:
-        print(f'Sorry, I don\'t understand this command: {words}')
+        print(f'Sorry, I don\'t understand this command: {cmd_str}')
         # say(f'Sorry, I don\'t understand this command: {words}')
         return UNRECOGNIZED_COMMAND_ERROR
     return SUCCESS
