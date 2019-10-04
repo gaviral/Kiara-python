@@ -1,10 +1,13 @@
 # Kiara
 
+Virtual Assistant
+
 ## Pre-Req
 
 - Python 3.6 (PyAudio doesn't support 3.7)
 - pip
 - PyCharm EAP
+- Visual Studio Build Tools (C++)
 
 ## Installation
 
@@ -16,8 +19,8 @@
     - `speech_recognition`
     -  `pyaudio`
 - For "I'm feeling lucky" feature:
-    - install "cjs 2" chrome extension
-    - Add JQuery3.x as a resource
+    - install `cjs 2` chrome extension
+    - Add `JQuery3` as a resource
     - Add following code for `google.com`:
     
 ```javascript
