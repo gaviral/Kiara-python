@@ -15,3 +15,17 @@
 - Run `install_cmds.sh` to install the following packages:
     - `speech_recognition`
     -  `pyaudio`
+- For "I'm feeling lucky" feature:
+    - install "cjs 2" chrome extension
+    - Add JQuery3.x as a resource
+    - Add following code for `google.com`:
+    
+```javascript
+
+$(document).ready(function(){
+  if($("*:contains(Redirect Notice)").length>1){
+    const newLink = document.getElementsByTagName('a')[0].href.css("background-color", "yellow");
+    window.location.replace(newLink);
+  }
+});
+```

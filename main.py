@@ -4,7 +4,6 @@ import playsound
 import speech_recognition as sr
 from gtts import gTTS
 from selenium import webdriver
-from selenium.webdriver.chrome.webdriver import WebDriver
 
 ON = 1
 OFF = 0
@@ -13,6 +12,7 @@ talk_mode = ON
 NO_LANG = ""
 PYTHON = "python"
 REACT = "react"
+JAVASCRIPT = "JavaScript"
 lang_mode = NO_LANG
 
 SEARCH_WORDS = ['search', 'when', 'why', 'how', 'Which', 'what', 'whose', 'who', 'where', 'whether', 'is', 'does', 'do']
@@ -20,13 +20,13 @@ SEARCH_WORDS = ['search', 'when', 'why', 'how', 'Which', 'what', 'whose', 'who',
 SUCCESS = 0
 UNRECOGNIZED_COMMAND_ERROR = -1
 
-SEARCH_TAB_URL = "https://www.google.com/search?q="
+CHROME_DRIVER_PATH = 'C:/chromedriver_win32/chromedriver.exe'
+SEARCH_TAB_URL = "https://www.google.com/search?btnI=Im+Feeling+Lucky&q="
 NEW = 2
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 print(dir_path)
 TEST_FILE = f"{os.getcwd()}\\__test_arena\\interviewPrep\\ik\\Trees\\dft.py"
-
 
 
 def get_text():
@@ -74,12 +74,15 @@ def say(words, file='tts.mp3'):
 
 ###########
 
-chrome_handler: WebDriver = webdriver.Chrome('C:/chromedriver_win32/chromedriver.exe')
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("user-data-dir=selenium")
+chrome_options.add_argument("start-maximized")
+chrome_handler = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
 
 
 def handle_command(mode, cmd_str):
     global lang_mode
-
+    cmd_str = str.lower(cmd_str)
     words = cmd_str.split(' ', 1)
 
     first_word = words[0]
@@ -89,14 +92,18 @@ def handle_command(mode, cmd_str):
         extracted_s_text = rest_words if first_word == "search" else cmd_str
         search_text = f'{lang_mode} {extracted_s_text}'
         search_url = f'{SEARCH_TAB_URL} {search_text}'
-        chrome_handler.get(search_url)
-        print(f'searched: {search_text}')
+
+        if len(words) > 1:
+            chrome_handler.get(search_url)
+            print(f'searched: {search_text}')
 
     elif "mode" in cmd_str:
-        if "python" in cmd_str:
+        if PYTHON in cmd_str:
             lang_mode = PYTHON
-        elif "react" in cmd_str:
+        elif REACT in cmd_str:
             lang_mode = REACT
+        elif JAVASCRIPT in cmd_str:
+            lang_mode = JAVASCRIPT
         elif "no" in cmd_str or "normal" in cmd_str:
             lang_mode = NO_LANG
         print(f'Language Mode: {lang_mode}')
@@ -131,7 +138,7 @@ def handle_talk_mode(mode, words):
 
 if __name__ == '__main__':
 
-    say('Hey let\'s go!')
+    # say('Hey let\'s go!')
 
     while True:
         text = get_text()
