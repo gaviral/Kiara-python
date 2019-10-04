@@ -3,25 +3,6 @@ import os
 import playsound
 from gtts import gTTS
 
-ON = 1
-OFF = 0
-STOP_TALKING_HOTWORDS = {'stop talking', 'pause'}
-START_TALKING_HOTWORDS = {'start talking', 'you can talk now', 'play'}
-
-talk_mode = OFF
-
-
-def handle_talk_mode(cmd_str):
-    global talk_mode
-
-    if cmd_str in STOP_TALKING_HOTWORDS:
-        say("ok! I'll stop talking")
-        talk_mode = OFF
-
-    elif cmd_str in START_TALKING_HOTWORDS:
-        talk_mode = ON
-        say("Alright, I'll talk now")
-
 
 def say(words, file='tts.mp3'):
     """
@@ -39,7 +20,7 @@ def say(words, file='tts.mp3'):
     def remove_mp3(f):
         os.remove(f)
 
-    print(f'Kiara: {words}')
+    print(f'Kiara {words}')
     if talk_mode:
         create_mp3(words, file)
         play_mp3(file)
