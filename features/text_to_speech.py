@@ -3,6 +3,8 @@ import os
 import playsound
 from gtts import gTTS
 
+from model.mode import get_talk_mode
+
 
 def say(words, file='tts.mp3'):
     """
@@ -21,7 +23,7 @@ def say(words, file='tts.mp3'):
         os.remove(f)
 
     print(f'Kiara {words}')
-    if talk_mode:
+    if get_talk_mode():
         create_mp3(words, file)
         play_mp3(file)
         remove_mp3(file)

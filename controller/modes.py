@@ -4,6 +4,7 @@ from model.mode import set_lang_mode, NORMAL, get_lang_mode, ON, OFF, set_talk_m
 
 # Initializations #############################################
 def init_modes() -> None:
+    set_talk_mode(OFF)
     set_lang_mode(NORMAL)
 
 
@@ -13,12 +14,13 @@ STOP_TALKING_HOTWORDS = {'stop talking'}
 
 
 def talk_mode_ctrlr(_words):
-    if _words in START_TALKING_HOTWORDS:
-        set_talk_mode(ON)
-        say("I'll be talking now.")
-    elif _words in STOP_TALKING_HOTWORDS:
-        say("ok! I'll stop talking.")
-        set_talk_mode(OFF)
+    # if _words in START_TALKING_HOTWORDS:
+    #     set_talk_mode(ON)
+    #     say("I'll be talking now.")
+    # elif _words in STOP_TALKING_HOTWORDS:
+    #     say("ok! I'll stop talking.")
+    #     set_talk_mode(OFF)
+    return
 
 
 # Kiara's lang_mode ###########################################
@@ -35,4 +37,5 @@ def lang_mode_ctrlr(_first_word, _second_word):
 # Main ########################################################
 def modes_controller(words):
     talk_mode_ctrlr(words)
-    lang_mode_ctrlr(words[0], words[1])
+    if len(words) == 2:
+        lang_mode_ctrlr(words[0], words[1])

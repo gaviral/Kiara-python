@@ -13,8 +13,9 @@ def get_lang_mode() -> str:
     return lang_mode
 
 
-ON = 1
-OFF = 0
+ON = True
+OFF = False
+
 talk_mode: str
 
 
@@ -23,7 +24,7 @@ def set_talk_mode(s: str) -> None:
     talk_mode = s
 
 
-def get_talk_mode() -> str:
+def get_talk_mode():
     global talk_mode
     return talk_mode
 
