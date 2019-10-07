@@ -8,6 +8,9 @@ STOP_LISTENING_HOTWORDS = {'stop listening', 'bye'}
 def init():
     init_modes()
 
+    # starting with speech searches
+    cmd_dispatcher("search")
+
 
 def cmd_dispatcher(sentence):
     if sentence in STOP_LISTENING_HOTWORDS:

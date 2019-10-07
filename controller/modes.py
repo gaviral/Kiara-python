@@ -1,5 +1,6 @@
+from features.speech_to_text import get_voice_input
 from features.text_to_speech import say
-from model.mode import set_lang_mode, NORMAL, get_lang_mode, ON, OFF, set_talk_mode
+from model.mode import set_lang_mode, NORMAL, get_lang_mode, OFF, set_talk_mode
 
 
 # Initializations #############################################
@@ -32,6 +33,15 @@ def lang_mode_ctrlr(_first_word, _second_word):
             set_lang_mode(_first_word)
 
         say(f'Language Mode: {get_lang_mode()}')
+
+
+# feeling_lucky_mode ###########################################
+feeling_lucky_mode: bool
+
+
+def is_feeling_lucky():
+    say("Are you feeling lucky?")
+    return True if get_voice_input(bool_answer=True) == "y" else False
 
 
 # Main ########################################################
