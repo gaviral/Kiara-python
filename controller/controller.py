@@ -26,6 +26,7 @@ def cmd_dispatcher(sentence):
 
 def controller():
     init()
+
     while True:
         if cmd_dispatcher(get_text_from_speech()):
             break

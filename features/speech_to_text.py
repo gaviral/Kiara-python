@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-WAIT_UNTIL_BOOL_ANSWER = -1
+WAIT_UNTIL_BOOL_ANSWER = None
 
 
 def get_text_from_speech(_ptl=3):

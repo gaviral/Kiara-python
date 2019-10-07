@@ -1,10 +1,8 @@
-import sys
-
 from pyautogui import press, hotkey
 from selenium import webdriver
 
 from custom_utilities.os.os_util import focus_my_browser
-from features.text_to_speech import say
+from model.mode import get_feeling_lucky_mode
 
 CHROME_DRIVER_PATH = 'C:/chromedriver_win32/chromedriver.exe'
 SEARCH_TAB_URL = "https://www.google.com/search?btnI=Im+Feeling+Lucky&q="
@@ -12,12 +10,7 @@ GOOGLE_URL = "https://www.google.com/"
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("user-data-dir=selenium")
 chrome_options.add_argument("start-maximized")
-
-try:
-    my_browser = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
-except:
-    e = sys.exc_info()[0]
-    say(e)
+my_browser = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
 
 
 def wait_for_url_change():
@@ -26,14 +19,14 @@ def wait_for_url_change():
         continue
 
 
-def i_am_feeling_lucky(_feeling_lucky=True):
-    if _feeling_lucky:
+def i_am_feeling_lucky():
+    if get_feeling_lucky_mode():
         press('tab')
         press('enter')
         press('enter')
 
 
-def google_speech_search(feeling_lucky=True):
+def google_speech_search():
     # Redirect first tab to Google
     my_browser.get(GOOGLE_URL)
 
@@ -55,4 +48,4 @@ def google_speech_search(feeling_lucky=True):
     wait_for_url_change()
 
     # Open the first google search results (aka: `I'm Feeling lucky` Name of Google's search feature)
-    i_am_feeling_lucky(feeling_lucky)
+    i_am_feeling_lucky()

@@ -13,6 +13,7 @@ def get_lang_mode() -> str:
     return lang_mode
 
 
+####################################
 ON = True
 OFF = False
 
@@ -28,3 +29,16 @@ def get_talk_mode():
     global talk_mode
     return talk_mode
 
+
+####################################
+feeling_lucky_mode: bool
+
+
+def get_feeling_lucky_mode():
+    global feeling_lucky_mode
+    return feeling_lucky_mode
+
+
+def set_feeling_lucky_mode(_bool):
+    global feeling_lucky_mode
+    feeling_lucky_mode = _bool
