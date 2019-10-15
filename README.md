@@ -1,6 +1,6 @@
 # Kiara
 
-Virtual Assistant
+Virtual Assistant using voice commands
 
 ## Pre-Req
 
@@ -9,7 +9,7 @@ Virtual Assistant
 - PyCharm EAP
 - Visual Studio Build Tools (C++)
 
-## Project Structure
+<!-- ## Project Structure
 
 
 ```ProjectStructure
@@ -23,7 +23,7 @@ Virtual Assistant
     ├── auth             # client-side authentication
     ├── components       # app components
     ├── containers       # components rep
-```
+``` -->
 
 ## Installation
 
