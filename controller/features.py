@@ -1,5 +1,6 @@
 import sys
 
+from pyautogui import hotkey, press
 from pyperclip import paste, copy
 
 from features.google_speech_search import google_speech_search
@@ -30,6 +31,39 @@ def type_ctrlr(_first_word, _sentence):
         paste()
 
 
+def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
+    if "new file" in _sentence:
+        hotkey('ctrl', 'n')
+    elif "save" in _sentence:
+        hotkey('ctrl', 's')
+    elif "reload" in _sentence:
+        hotkey('ctrl', 'f5')
+    elif _first_word == "code":
+        # TODO: move this code to open in my_browser
+        hotkey('ctrl', 't')
+        copy(f'https://leetcode.com/problemset/all/?search={_words[1]}')
+        hotkey('ctrl', 'l')
+        hotkey('ctrl', 'v')
+        press('enter')
+
+
+        # custom script
+    elif "script" in _sentence:
+        for i in range(6, 13):
+            for j in range(0,10):
+                press('up')
+                press('f2')
+                press('left')
+                press('del')
+                press('del')
+                press(f'{i}')
+                press('enter')
+
+        # press('enter')
+        pass
+
+
 def features_controller(sentence, words):
     search_ctrlr(words[0])
     type_ctrlr(words[0], sentence)
+    keyboard_cmd_ctrlr(words[0], words, sentence)

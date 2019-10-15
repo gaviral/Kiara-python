@@ -20,7 +20,7 @@ class WindowManager:
     def _window_enum_callback(self, hwnd, wildcard):
         """Pass to win32gui.EnumWindows() to check all the opened windows"""
         if re.match(wildcard, str(win32gui.GetWindowText(hwnd))) is not None:
-            print(f'hwnd: {hwnd}')
+            # print(f'hwnd: {hwnd}')
             self._handle = hwnd
 
     def find_window_wildcard(self, wildcard):

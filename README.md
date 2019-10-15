@@ -9,6 +9,22 @@ Virtual Assistant
 - PyCharm EAP
 - Visual Studio Build Tools (C++)
 
+## Project Structure
+
+
+```ProjectStructure
+.                       # Root
+├── .vscode             # vscode config files
+├── Infrastructure       # ARM template (Azure provisioning)
+    └── logintemplate    # login/sign-up UI
+├── Client
+    ├── src              # main client code
+    ├── api              # clients interface(s) to the servers API
+    ├── auth             # client-side authentication
+    ├── components       # app components
+    ├── containers       # components rep
+```
+
 ## Installation
 
 - Open project in PyCharm.
