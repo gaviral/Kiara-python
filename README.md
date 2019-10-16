@@ -1,6 +1,29 @@
 # Kiara
 
-Virtual Assistant using voice commands
+Intelligent Assistant using voice commands. Coming soon: Context-awareness
+
+## Features
+
+### Voice Commands
+
+- Google Search <!-- TODO: Context-aware Google Search -->
+- Visual Studio Code Commands:
+  - New file
+  - Save file
+- Custom-Mini-Scripts
+  - say "leetCode 112" -> opens leetCode problem #: 112 in browser
+  - say "reload" -> reload this project itself (helps in testing newly added features)
+- Typing Mode (In-progress) <!-- TODO: Fix this recently broken feature -->
+- Call someone (In-progress)
+- Context-aware coding
+
+## Tech-Used
+
+- Pure-Python
+- Speech-to-Text: Google Speech to Text
+- Text-to-Speech: playsound + Google Speech to Text
+- keyboard simulation: pyAutoGUI
+- clipboard controller: pyperclip
 
 ## Pre-Req
 

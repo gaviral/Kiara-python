@@ -13,11 +13,11 @@ def say(words, file='tts.mp3'):
     :param file:
     """
 
-    def play_mp3(mp3_file):
-        playsound.playsound(mp3_file, True)
-
     def create_mp3(t, f):
         gTTS(text=t, lang='en', slow=False).save(f)
+
+    def play_mp3(mp3_file):
+        playsound.playsound(mp3_file, True)
 
     def remove_mp3(f):
         os.remove(f)
