@@ -68,6 +68,13 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
                 press('enter')
 
         # press('enter')
+    elif _first_word == "commit":
+        # Last open projects
+        # Get the last working project window
+        # (Think if a confirmation logic is needed)
+        # Commit command in the apt project directory
+        pass
+
         pass
 
 
