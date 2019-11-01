@@ -32,11 +32,14 @@ def type_ctrlr(_first_word, _sentence):
 
 
 def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
+    # TODO: make context aware
     if "new file" in _sentence:
         hotkey('ctrl', 'n')
     elif "save" in _sentence:
         hotkey('ctrl', 's')
     elif "reload" in _sentence:
+        # TODO: bring forward IDE
+        # TODO: bringForwardIDE()
         hotkey('ctrl', 'f5')
     elif _first_word == "code":
         # TODO: move this code to open in my_browser
