@@ -55,19 +55,6 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         hotkey('ctrl', 'v')
         press('enter')
 
-        # custom script
-    elif "script" in _sentence:
-        for i in range(6, 13):
-            for j in range(0,10):
-                press('up')
-                press('f2')
-                press('left')
-                press('del')
-                press('del')
-                press(f'{i}')
-                press('enter')
-
-        # press('enter')
     elif _first_word == "commit":
         # Last open projects
         # Get the last working project window
@@ -75,6 +62,8 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         # Commit command in the apt project directory
         pass
 
+    # custom script
+    elif "____" in _sentence:
         pass
 
 
