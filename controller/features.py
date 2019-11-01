@@ -46,6 +46,14 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         hotkey('ctrl', 'v')
         press('enter')
 
+    elif _first_word == "line":
+        # code-editor: go to line __
+        # TODO: Refactor out
+        # TODO: only when in vscode/intelliJ
+        copy(f'{_words[1]}')
+        hotkey('ctrl', 'g')
+        hotkey('ctrl', 'v')
+        press('enter')
 
         # custom script
     elif "script" in _sentence:
