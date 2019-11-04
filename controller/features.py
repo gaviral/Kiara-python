@@ -3,7 +3,8 @@ import sys
 from pyautogui import hotkey, press
 from pyperclip import paste, copy
 
-from features.google_speech_search import google_speech_search
+from custom_utilities.os.os_util import focus_my_browser
+from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
 from features.text_to_speech import say
 
 SEARCH_HOTWORDS = {'search', 'versus', 'difference', 'when', 'why', 'how', 'Which', 'what', 'who', 'where', 'whether',
@@ -37,9 +38,14 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         hotkey('ctrl', 'n')
     elif "save" in _sentence:
         hotkey('ctrl', 's')
-    elif "reload" in _sentence:
+
+    elif "reload" == _first_word:
         # TODO: bring forward IDE
         # TODO: bringForwardIDE()
+        # until then assumption is: last focus is on IDE
+        my_browser.get(GOOGLE_URL)
+        focus_my_browser()
+        hotkey('alt', 'f4')
         hotkey('ctrl', 'f5')
     elif _first_word == "code":
         # TODO: move this code to open in my_browser
