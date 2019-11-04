@@ -80,6 +80,19 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         copy(f'{" ".join(_words[1:])}')
         hotkey('ctrl', 'v')
 
+    # code mode#######################
+    elif _first_word == "press":
+        key = _words[1] if len(_words) > 1 else ""
+        copy(f'press(\'{key}\')')
+        hotkey('ctrl', 'v')
+
+    elif _first_word == "alt" or _first_word == "ctrl" or _first_word == "control":
+        if _first_word == "control":
+            _first_word = "ctrl"
+        copy(f'hotkey(\'{_first_word}\',\'{_words[1]}\')\n')
+        hotkey('ctrl', 'v')
+    # end of code mode#######################
+
     # elif _first_word == "commit":
     #     # decide which open project
     #     # open gitextensions
