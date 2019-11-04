@@ -1,9 +1,9 @@
 import sys
 
 from pyautogui import hotkey, press
-from pyperclip import paste, copy
+from pyperclip import copy
 
-from custom_utilities.os.os_util import focus_my_browser
+from custom_utilities.os.os_util import focus_my_browser, focus, print_all_windows
 from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
 from features.text_to_speech import say
 
@@ -80,6 +80,9 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         copy(f'{" ".join(_words[1:])}')
         hotkey('ctrl', 'v')
 
+    elif 'all' in _words and 'windows' in _words:
+        print_all_windows()
+
     # code mode#######################
     elif _first_word == "press":
         key = _words[1] if len(_words) > 1 else ""
@@ -99,8 +102,6 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     #     commandLine = openCommandLine(project_path)
     #     commandLine.run("GitExtensions .")
     #
-    #
-    #
     #     if editor is VS_CODE:
     #         hotkey('ctrl', 'v')
     #     elif editor is INTELLIJ:
@@ -109,7 +110,9 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     #     pass
 
     # custom script
-    elif "____" in _sentence:
+    elif "testing" == _first_word:
+        focus("GoalNav")
+        # open_git_extensions()
         pass
 
 

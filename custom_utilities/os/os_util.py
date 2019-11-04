@@ -25,3 +25,7 @@ def get_foreground_window_class():
 
 
 
+
+def print_all_windows():
+    w = WindowManager()
+    w.list_all_windows()
