@@ -66,6 +66,11 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         hotkey('ctrl', 'v')
         press('enter')
 
+    elif _words[0] == "find" and _words[1] == "all":
+        hotkey('ctrl', 'shift', 'f')
+        copy(f'{" ".join(_words[2:])}')
+        hotkey('ctrl', "v")
+
     elif _first_word == "find":
         hotkey('ctrl', 'f')
         copy(f'{" ".join(_words[1:])}')
