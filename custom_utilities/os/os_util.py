@@ -11,3 +11,17 @@ def focus_my_browser():
     w = WindowManager()
     w.find_window_wildcard("Google")
     w.set_foreground()
+
+
+def get_foreground_window():
+    w = WindowManager()
+    _s = w.get_foreground_window()
+    return _s
+
+
+def get_foreground_window_class():
+    w = WindowManager()
+    return w.get_foreground_window_class()
+
+
+

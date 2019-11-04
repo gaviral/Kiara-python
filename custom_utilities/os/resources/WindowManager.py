@@ -28,6 +28,14 @@ class WindowManager:
         self._handle = None
         win32gui.EnumWindows(self._window_enum_callback, wildcard)
 
+    def get_foreground_window(self):
+        """Pass to win32gui.EnumWindows() to check all the opened windows"""
+        return win32gui.GetWindowText(win32gui.GetForegroundWindow())
+
+    def get_foreground_window_class(self):
+        """Pass to win32gui.EnumWindows() to check all the opened windows"""
+        return win32gui.GetClassName(win32gui.GetForegroundWindow())
+
     def set_foreground(self):
         """put the window in the foreground"""
         if self._handle is not None:
