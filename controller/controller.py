@@ -9,7 +9,7 @@ def init():
     init_modes()
 
     # starting with speech searches
-    cmd_dispatcher("search")
+    # cmd_dispatcher("search")
 
 
 def cmd_dispatcher(sentence):

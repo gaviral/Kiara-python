@@ -64,16 +64,24 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         hotkey('ctrl', 'v')
         press('enter')
 
-    elif _first_word == "commit":
-        # Last open projects
-        # Get the last working project window
-        # (Think if a confirmation logic is needed)
-        # Commit command in the apt project directory
-        pass
     elif _first_word == "type":
         copy(f'{" ".join(_words[1:])}')
         hotkey('ctrl', 'v')
 
+    # elif _first_word == "commit":
+    #     # decide which open project
+    #     # open gitextensions
+    #     commandLine = openCommandLine(project_path)
+    #     commandLine.run("GitExtensions .")
+    #
+    #
+    #
+    #     if editor is VS_CODE:
+    #         hotkey('ctrl', 'v')
+    #     elif editor is INTELLIJ:
+    #         hotkey('alt', 'f12')
+    #
+    #     pass
 
     # custom script
     elif "____" in _sentence:
