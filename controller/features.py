@@ -36,6 +36,7 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     # TODO: make context aware
     if "new file" in _sentence:
         hotkey('ctrl', 'n')
+
     elif "save" in _sentence:
         hotkey('ctrl', 's')
 
@@ -47,6 +48,7 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         focus_my_browser()
         hotkey('alt', 'f4')
         hotkey('ctrl', 'f5')
+
     elif _first_word == "code":
         # TODO: move this code to open in my_browser
         hotkey('ctrl', 't')

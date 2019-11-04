@@ -200,3 +200,5 @@ fabric.properties
 !.vscode/extensions.json
 
 /selenium/*
+/controller/Project.pyi
+/tts.mp3
