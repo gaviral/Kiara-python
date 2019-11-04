@@ -3,7 +3,7 @@ import sys
 from pyautogui import hotkey, press
 from pyperclip import copy
 
-from custom_utilities.os.os_util import focus_my_browser, focus, print_all_windows
+from custom_utilities.os.os_util import focus_my_browser, focus, print_all_windows, open_git_extensions
 from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
 from features.text_to_speech import say
 
@@ -94,6 +94,14 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
             _first_word = "ctrl"
         copy(f'hotkey(\'{_first_word}\',\'{_words[1]}\')\n')
         hotkey('ctrl', 'v')
+
+    elif ("get" in _words or "git" in _words) and "extensions" in _words:
+        if "charm" in _words or "pycharm" in _words:
+            open_git_extensions("PyCharm")
+        elif "storm" in _words or "webstorm" in _words:
+            open_git_extensions("PyCharm")
+        else:
+            open_git_extensions()
     # end of code mode#######################
 
     # elif _first_word == "commit":
