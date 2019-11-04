@@ -16,7 +16,7 @@ def get_text_from_speech(_timeout=0.5):
             # print('DEBUG: speechrecognition.WaitTimeoutError')
             pass
         except sr.UnknownValueError:
-            print('DEBUG: speechrecognition.UnknownValueError')
+            # print('DEBUG: speechrecognition.UnknownValueError')
             pass
 
     return text

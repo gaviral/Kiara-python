@@ -1,7 +1,7 @@
 from pyautogui import press, hotkey
 from selenium import webdriver
 
-from custom_utilities.os.os_util import focus_my_browser
+from controller.features import focus_my_browser
 from model.mode import get_feeling_lucky_mode
 
 CHROME_DRIVER_PATH = 'C:/chromedriver_win32/chromedriver.exe'
