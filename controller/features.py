@@ -23,13 +23,13 @@ def search_ctrlr(_first_word):
             say(e)
 
 
-TYPE_HOTWORDS = {'type', 'add'}
-
-
-def type_ctrlr(_first_word, _sentence):
-    if _first_word in TYPE_HOTWORDS:
-        copy(_sentence)
-        paste()
+# TYPE_HOTWORDS = {'type', 'add'}
+#
+#
+# def type_ctrlr(_first_word, _sentence):
+#     if _first_word in TYPE_HOTWORDS:
+#         copy(_sentence)
+#         paste()
 
 
 def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
@@ -70,6 +70,10 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         # (Think if a confirmation logic is needed)
         # Commit command in the apt project directory
         pass
+    elif _first_word == "type":
+        copy(f'{" ".join(_words[1:])}')
+        hotkey('ctrl', 'v')
+
 
     # custom script
     elif "____" in _sentence:
@@ -78,5 +82,5 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
 
 def features_controller(sentence, words):
     search_ctrlr(words[0])
-    type_ctrlr(words[0], sentence)
+    # type_ctrlr(words[0], sentence)
     keyboard_cmd_ctrlr(words[0], words, sentence)
