@@ -106,13 +106,13 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         else:
             open_git_extensions()
 
-    elif _first_word == "commit":
+    elif _first_word == "commit" or (_first_word == "git" and "commit" in _words):
         commit()
     # end of GitExtensions mode#######################
 
     # custom script
     elif "testing" == _first_word:
-        commit()
+        # commit()
         pass
 
 
