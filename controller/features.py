@@ -1,10 +1,11 @@
 import sys
+from time import sleep
 
 from pyautogui import hotkey, press
 from pyperclip import copy
 
 from custom_utilities.os.os_util import print_all_windows, get_foreground_window, focus_my_browser, \
-    get_foreground_window_class
+    get_foreground_window_class, focus
 from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
 from features.text_to_speech import say
 
@@ -44,7 +45,7 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     elif "reload" == _first_word:
         # TODO: bring forward IDE
         # TODO: bringForwardIDE()
-        # until then assumption is: last focus is on IDE
+        focus('PyCharm')
         my_browser.get(GOOGLE_URL)
         focus_my_browser()
         hotkey('alt', 'f4')
@@ -77,9 +78,12 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         copy(f'{" ".join(_words[1:])}')
         hotkey('ctrl', "v")
 
-    elif _first_word == "type":
-        copy(f'{" ".join(_words[1:])}')
-        hotkey('ctrl', 'v')
+    elif _first_word == "type" or ("start" == _first_word and ("typing" in _words or "dictating" in _words)):
+        if _first_word == "type":
+            copy(f'{" ".join(_words[1:])}')
+            hotkey('ctrl', 'v')
+        else:
+            hotkey('win', 'h')
 
     elif 'all' in _words and 'windows' in _words:
         print_all_windows()
@@ -93,7 +97,18 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     elif _first_word == "alt" or _first_word == "ctrl" or _first_word == "control":
         if _first_word == "control":
             _first_word = "ctrl"
-        copy(f'hotkey(\'{_first_word}\',\'{_words[1]}\')\n')
+        copy(f'hotkey(\'{_first_word}\', \'{_words[1]}\')\n')
+        hotkey('ctrl', 'v')
+
+    elif _first_word == "sleep":
+        seconds = _words[1]
+        if seconds == 'one':
+            seconds = '1'
+        if seconds == 'to' or seconds == 'too':
+            seconds = '2'
+        if seconds == 'tree' or seconds == 'train':
+            seconds = '3'
+        copy(f'sleep({seconds})')
         hotkey('ctrl', 'v')
     # end of code mode#######################
 
@@ -106,7 +121,7 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         else:
             open_git_extensions()
 
-    elif _first_word == "commit" or (_first_word == "git" and "commit" in _words):
+    elif _first_word == "commit" or ((_first_word == "git" or _first_word == "get") and "commit" in _words):
         commit()
     # end of GitExtensions mode#######################
 
@@ -144,6 +159,8 @@ def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
         print(f'{project_or_ide} is not a supported IDE')
         return
 
+    sleep(1)
+
     if project_or_ide in JET_BRAINS_IDES or ide_class in JET_BRAINS_IDE_CLASS_NAMES:
         hotkey('alt', 'f12')
     elif project_or_ide in MICROSOFT_IDES or ide_class in MICROSOFT_IDE_CLASS_NAMES:
@@ -152,11 +169,12 @@ def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
     copy('GitExtensions')
     hotkey('ctrl', 'v')
     press('enter')
+    hotkey('alt', 'f12')
 
 
 def open_commit_window():
     w_name = get_foreground_window().split(" ")
-    if 'git' in w_name:
+    if 'Git' in w_name:
         hotkey('ctrl', 'space')
 
 
@@ -167,6 +185,10 @@ def press_commit_button():
 
 
 def commit():
-    open_git_extensions(show_error=False)
-    open_commit_window()
+    # if in commit window already
     press_commit_button()
+    # else
+    open_git_extensions(show_error=False)
+    sleep(2)
+    open_commit_window()
+

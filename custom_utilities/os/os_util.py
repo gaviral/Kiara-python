@@ -3,7 +3,7 @@ from custom_utilities.os.resources.WindowManager import WindowManager
 
 def focus(s):
     w = WindowManager()
-    w.find_window_wildcardGitExtensions(s)
+    w.find_window_wildcard(s)
     w.set_foreground()
 
 
