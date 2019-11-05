@@ -31,7 +31,6 @@ class WindowManager:
     def _custom_focus_window_enum_callback(self, hwnd, wildcard):
         """Pass to win32gui.EnumWindows() to check all the opened windows"""
         if wildcard in str(win32gui.GetWindowText(hwnd)):
-            print(f'hwnd: {hwnd}')
             self._handle = hwnd
 
     def list_all_windows(self):
@@ -48,7 +47,6 @@ class WindowManager:
         """find a window whose title matches the wildcard regex"""
         self._handle = None
         win32gui.EnumWindows(self._custom_focus_window_enum_callback, wildcard)
-
 
     def get_foreground_window(self):
         """Pass to win32gui.EnumWindows() to check all the opened windows"""

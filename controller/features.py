@@ -3,9 +3,9 @@ import sys
 from pyautogui import hotkey, press
 from pyperclip import copy
 
-from custom_utilities.os.os_util import focus, print_all_windows, get_foreground_window, focus_my_browser, \
+from custom_utilities.os.os_util import print_all_windows, get_foreground_window, focus_my_browser, \
     get_foreground_window_class
-from features.google_speech_search import google_speech_search
+from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
 from features.text_to_speech import say
 
 SEARCH_HOTWORDS = {'search', 'versus', 'difference', 'when', 'why', 'how', 'Which', 'what', 'who', 'where', 'whether',
