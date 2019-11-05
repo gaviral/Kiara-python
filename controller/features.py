@@ -3,8 +3,9 @@ import sys
 from pyautogui import hotkey, press
 from pyperclip import copy
 
-from custom_utilities.os.os_util import focus, print_all_windows, get_foreground_window
-from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL
+from custom_utilities.os.os_util import focus, print_all_windows, get_foreground_window, focus_my_browser, \
+    get_foreground_window_class
+from features.google_speech_search import google_speech_search
 from features.text_to_speech import say
 
 SEARCH_HOTWORDS = {'search', 'versus', 'difference', 'when', 'why', 'how', 'Which', 'what', 'who', 'where', 'whether',
@@ -106,13 +107,12 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
             open_git_extensions()
 
     elif _first_word == "commit":
-        git_extensions_commit()
+        commit()
     # end of GitExtensions mode#######################
 
     # custom script
     elif "testing" == _first_word:
-        focus("GoalNav")
-        # open_git_extensions()
+        commit()
         pass
 
 
@@ -122,26 +122,31 @@ def features_controller(sentence, words):
     keyboard_cmd_ctrlr(words[0], words, sentence)
 
 
-JET_BRAINS_IDES_OR_CLASS_NAMES = {'PyCharm', 'SunAwtFrame'}
-MICROSOFT_IDES_OR_CLASS_NAMES = {'code'}
-SUPPORTED_IDES_OR_PROJECTS = JET_BRAINS_IDES_OR_CLASS_NAMES.union(MICROSOFT_IDES_OR_CLASS_NAMES).union(['GoalNav'])
+JET_BRAINS_IDES = {'PyCharm'}
+JET_BRAINS_IDE_CLASS_NAMES = {'SunAwtFrame'}
+MICROSOFT_IDES = {'code'}
+MICROSOFT_IDE_CLASS_NAMES = {
+    'Chrome_WidgetWin_1'}  # careful 'Chrome_WidgetWin_1' is the class for both vscode & Google Chrome
+SUPPORTED_IDES_OR_PROJECTS = JET_BRAINS_IDES.union(JET_BRAINS_IDE_CLASS_NAMES, MICROSOFT_IDE_CLASS_NAMES,
+                                                   MICROSOFT_IDES, ['GoalNav'])
 
 
-def open_git_extensions(project_or_ide=None):
+def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
     if project_or_ide is None:
         project_or_ide = get_foreground_window()
+    if ide_class is None:
+        ide_class = get_foreground_window_class()
 
-    print(project_or_ide)
     if len(project_or_ide.split(" ")) > 1:
         project_or_ide = project_or_ide.split(" ")[-1]
 
-    if project_or_ide not in SUPPORTED_IDES_OR_PROJECTS:
+    if project_or_ide not in SUPPORTED_IDES_OR_PROJECTS and show_error is False:
         print(f'{project_or_ide} is not a supported IDE')
         return
 
-    if project_or_ide in JET_BRAINS_IDES_OR_CLASS_NAMES:
+    if project_or_ide in JET_BRAINS_IDES or ide_class in JET_BRAINS_IDE_CLASS_NAMES:
         hotkey('alt', 'f12')
-    elif project_or_ide in MICROSOFT_IDES_OR_CLASS_NAMES:
+    elif project_or_ide in MICROSOFT_IDES or ide_class in MICROSOFT_IDE_CLASS_NAMES:
         hotkey('ctrl', 'shift', '`')
 
     copy('GitExtensions')
@@ -149,16 +154,19 @@ def open_git_extensions(project_or_ide=None):
     press('enter')
 
 
-def git_extensions_commit():
-    focus("Git")
-    hotkey('alt', 'c')
+def open_commit_window():
+    w_name = get_foreground_window().split(" ")
+    if 'git' in w_name:
+        hotkey('ctrl', 'space')
 
 
-def focus_my_browser():
-    """
-    Bring OS focus on my_browser
-    [find_by_window_title("Google") -> bring os focus to it]
-    TODO: code to remove this requirement
-        POSSIBLE SOLUTION: get process ID of my_browser and use that identifier instead
-    """
-    focus("Google")
+def press_commit_button():
+    w_name = get_foreground_window().split(" ")
+    if 'commit' in w_name and 'to' in w_name:
+        hotkey('alt', 'c')
+
+
+def commit():
+    open_git_extensions(show_error=False)
+    open_commit_window()
+    press_commit_button()
