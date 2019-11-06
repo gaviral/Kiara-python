@@ -220,12 +220,12 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         seconds = '1' if w2('one') else '2' if w2('to') else _words if len(_words) > 1 else ""
         insert_text(f'sleep({seconds})')
 
-    elif "if" in _words and "first" in _words and "word" in _words:
+    elif w1("first") and w2("word"):
         # TODO: check if in kiara and a IDE
-        insert_text(f'elif w1(\'{_sentence.split("is ")[1]}\':\n\t')
+        insert_text(f"""elif w1(\'{" ".join(_words[2:])}\'):\n\t""") if len(_words) > 2 else None
 
     elif "if" in _words and "in" in _words and "words" in _words:
-        insert_text(f'elif \'{_words[1]}\' in _words:\n\t')
+        insert_text(f'elif in_w(\'{_words[1]}\'):\n\t')
     # endregion
 
     # region GitExtensions commands
