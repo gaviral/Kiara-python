@@ -218,6 +218,16 @@ def open_commit_window():
         hotkey('ctrl', 'space')
 
 
+def print_fail(cause):
+    print(
+        f"""
+        FAILED: {inspect.stack()[1].function}
+        Cause: {cause}
+        STACK: {inspect.stack()}
+        """
+    )
+
+
 def press_commit_button():
     w_name = get_foreground_window().split(" ")
     if 'commit' in w_name and 'to' in w_name:
