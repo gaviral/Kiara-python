@@ -1,9 +1,20 @@
 from custom_utilities.os.resources.WindowManager import WindowManager
 
 
-def focus(s):
+def get_window_handler(s):
     w = WindowManager()
     w.find_window_wildcard(s)
+    return w
+
+
+def custom_get_window_handler(s):
+    w = WindowManager()
+    w.custom_find_window_wildcard(s)
+    return w
+
+
+def focus(s, use_custom=False):
+    w = custom_get_window_handler(s) if use_custom else get_window_handler(s)
     w.set_foreground()
 
 

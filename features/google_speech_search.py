@@ -7,6 +7,7 @@ from model.mode import get_feeling_lucky_mode
 CHROME_DRIVER_PATH = 'C:/chromedriver_win32/chromedriver.exe'
 SEARCH_TAB_URL = "https://www.google.com/search?btnI=Im+Feeling+Lucky&q="
 GOOGLE_URL = "https://www.google.com/"
+IK_URL = "https://oj.interviewkickstart.com/view_test/6456/" # todo: change this
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("user-data-dir=selenium")
 chrome_options.add_argument("start-maximized")
@@ -24,6 +25,12 @@ def i_am_feeling_lucky():
         press('tab')
         press('enter')
         press('enter')
+
+
+def open_ik():
+    # todo
+    my_browser.get(IK_URL)
+    focus_my_browser()
 
 
 def google_speech_search():
