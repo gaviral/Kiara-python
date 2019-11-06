@@ -270,6 +270,12 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
 #  2. write conditions for:
 #       save_file()
 #  3. could replace w1/w2 and so on with regex
+#  4. commands
+#       git:
+#           push
+#       popcorn-time
+#       shutdown
+
 
 # SEARCH_HOTWORDS = {'search', 'versus', 'difference', 'when', 'why', 'how', 'Which', 'what', 'who', 'where', 'whether',
 #                    'is',
