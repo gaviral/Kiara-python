@@ -34,6 +34,10 @@ def search_ctrlr(_first_word):
 #         paste()
 
 
+def paste():
+    hotkey('ctrl', 'v')  # todo: make it better
+
+
 def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     # TODO: make context aware
     if "new file" in _sentence:
@@ -54,18 +58,16 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     elif _first_word == "code":
         # TODO: move this code to open in my_browser
         hotkey('ctrl', 't')
-        copy(f'https://leetcode.com/problemset/all/?search={_words[1]}')
         hotkey('ctrl', 'l')
-        hotkey('ctrl', 'v')
+        insert_text(f'https://leetcode.com/problemset/all/?search={_words[1]}')
         press('enter')
 
     elif _first_word == "line":
         # code-editor: go to line __
         # TODO: Refactor out
         # TODO: only when in vscode/intelliJ
-        copy(f'{_words[1]}')
         hotkey('ctrl', 'g')
-        hotkey('ctrl', 'v')
+        insert_text(f'{_words[1]}')
         press('enter')
 
     elif _words[0] == "find" and _words[1] == "all":
@@ -80,8 +82,7 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
 
     elif _first_word == "type" or ("start" == _first_word and ("typing" in _words or "dictating" in _words)):
         if _first_word == "type":
-            copy(f'{" ".join(_words[1:])}')
-            hotkey('ctrl', 'v')
+            insert_text(f'{" ".join(_words[1:])}')
         else:
             hotkey('win', 'h')
 
@@ -108,8 +109,14 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
             seconds = '2'
         if seconds == 'tree' or seconds == 'train':
             seconds = '3'
-        copy(f'sleep({seconds})')
+        insert_text(f'sleep({seconds})')
+
+    elif "if" in _words and "first" in _words and "word" in _words:
+        copy(f'elif _first_word == \'{_sentence.split("is ")[1]}\':\n\t')
         hotkey('ctrl', 'v')
+
+    elif "if" in _words and "in" in _words and "words" in _words:
+        insert_text(f'elif \'{_words[1]}\' in _words:\n\t')
     # end of code mode#######################
 
     # GitExtensions mode#######################
@@ -125,10 +132,42 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
         commit()
     # end of GitExtensions mode#######################
 
+    # YouTube features ###############################
+    elif _first_word == 'play' or _first_word == 'pause':
+        press('space')
+    # end of YouTube features ########################
+
+    elif _first_word == 'history':
+        hotkey('ctrl', 'h')
+
+    elif _first_word == 'fast' or _first_word == 'faster':
+        press('f')
+        hotkey('alt', 'l')
+        press('e')
+        press('f')
+        press('f')
+
+    elif _first_word == 'slow' or _first_word == 'slower':
+        press('f')
+        hotkey('alt', 'l')
+        press('e')
+        press('w')
+        press('f')
+
+
+
+    elif _first_word == 'slow':
+        press('-')
+
     # custom script
     elif "testing" == _first_word:
         # commit()
         pass
+
+
+def insert_text(type_txt):
+    copy(type_txt)
+    paste()
 
 
 def features_controller(sentence, words):
@@ -166,8 +205,9 @@ def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
     elif project_or_ide in MICROSOFT_IDES or ide_class in MICROSOFT_IDE_CLASS_NAMES:
         hotkey('ctrl', 'shift', '`')
 
-    copy('GitExtensions')
-    hotkey('ctrl', 'v')
+    sleep(1)
+
+    insert_text('GitExtensions')
     press('enter')
     hotkey('alt', 'f12')
 
