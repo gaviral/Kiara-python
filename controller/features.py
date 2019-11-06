@@ -38,15 +38,6 @@ def search_cmd_ctrlr(_first_word):
             say(e)
 
 
-JET_BRAINS_IDES = {'PyCharm', 'webstorm'}
-JET_BRAINS_IDE_CLASS_NAMES = {'SunAwtFrame'}
-MICROSOFT_IDES = {'code'}
-MICROSOFT_IDE_CLASS_NAMES = {
-    'Chrome_WidgetWin_1'}  # careful 'Chrome_WidgetWin_1' is the class for both vscode & Google Chrome
-SUPPORTED_IDES_OR_PROJECTS = JET_BRAINS_IDES.union(JET_BRAINS_IDE_CLASS_NAMES, MICROSOFT_IDE_CLASS_NAMES,
-                                                   MICROSOFT_IDES, ['GoalNav'])
-
-
 def print_fail(cause):
     print(
         f"""
@@ -55,6 +46,15 @@ def print_fail(cause):
         STACK: {inspect.stack()}
         """
     )
+
+
+JET_BRAINS_IDES = {'PyCharm', 'webstorm'}
+JET_BRAINS_IDE_CLASS_NAMES = {'SunAwtFrame'}
+MICROSOFT_IDES = {'code'}
+MICROSOFT_IDE_CLASS_NAMES = {
+    'Chrome_WidgetWin_1'}  # careful 'Chrome_WidgetWin_1' is the class for both vscode & Google Chrome
+SUPPORTED_IDES_OR_PROJECTS = JET_BRAINS_IDES.union(JET_BRAINS_IDE_CLASS_NAMES, MICROSOFT_IDE_CLASS_NAMES,
+                                                   MICROSOFT_IDES, ['GoalNav'])
 
 
 def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
@@ -163,25 +163,23 @@ def commit():
     open_commit_window()
 
 
+def change_playback_vlc(faster):
+    press('f')
+    alt('l')
+    press('e')
+    press('f' if faster else 'w')
+    press('f')
+
+
 def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
-    def is_text_in(y):
-        return lambda x: x in y
-
-    def is_text(y):
-        return lambda x: x == y
-
     # @formatter:off
-    in_s = is_text_in(_sentence)                            # check _sentence
-    in_w = is_text_in(_words)                               # check _words
-    w1 = is_text(_first_word)                               # check first word
-    w2 = is_text(_words[1]) if len(_words) > 1 else False   # check second word (if it exists)
+    def is_text_in(x, y): return x in y
+    def is_text(x, y): return x == y
+    def in_s(x): return is_text_in(x, _sentence)                            # check _sentence
+    def in_w(x): return is_text_in(x, _words)                               # check _words
+    def w1(x): return is_text(x, _first_word)                               # check first word
+    def w2(x): return is_text(x, _words[1]) if len(_words) > 1 else False   # check second word (if it exists)
     # @formatter:on
-
-    # todo:
-    #  1. write regression tests
-    #  2. write conditions for:
-    #       save_file()
-    #  3. could replace w1/w2 and so on with regex
 
     if in_s('new file'):
         new_file()
@@ -253,18 +251,10 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
 
     # region vlc commands
     elif w1('fast') or w1('faster'):
-        press('f')
-        alt('l')
-        press('e')
-        press('f')
-        press('f')
+        change_playback_vlc(faster=True)
 
     elif w1('slow') or w1('slower'):
-        press('f')
-        alt('l')
-        press('e')
-        press('w')
-        press('f')
+        change_playback_vlc(faster=False)
     # endregion
 
     elif 'all' in _words and 'windows' in _words:
@@ -274,6 +264,12 @@ def keyboard_cmd_ctrlr(_first_word, _words, _sentence):
     elif "testing" == _first_word:
         pass
     # endregion
+
+# todo:
+#  1. write regression tests
+#  2. write conditions for:
+#       save_file()
+#  3. could replace w1/w2 and so on with regex
 
 # SEARCH_HOTWORDS = {'search', 'versus', 'difference', 'when', 'why', 'how', 'Which', 'what', 'who', 'where', 'whether',
 #                    'is',
