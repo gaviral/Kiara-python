@@ -15,7 +15,7 @@ Intelligent Assistant using voice commands. Coming soon: Context-awareness
   - say "reload" -> reload this project itself (helps in testing newly added features)
 - Typing Mode (In-progress) <!-- TODO: Fix this recently broken feature -->
 - Call someone (In-progress)
-- Context-aware coding
+- Context-aware coding (TODO)
 
 ## Tech-Used
 
