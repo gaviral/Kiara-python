@@ -54,6 +54,7 @@ Intelligent Assistant using voice commands. Coming soon: Context-awareness
 - Install the following Packages (`Alt-Enter` on errors in `main.py`):
     - `playsound`
     - `gtts`
+    - `pyautogui`
 - Run `install_cmds.sh` to install the following packages:
     - `speech_recognition`
     -  `pyaudio`

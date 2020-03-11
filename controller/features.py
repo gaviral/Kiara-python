@@ -5,8 +5,6 @@ from time import sleep
 from pyautogui import hotkey, press
 from pyperclip import copy
 
-from custom_utilities.os.os_util import print_all_windows, get_foreground_window, focus_my_browser, \
-    get_foreground_window_class, focus
 from features.google_speech_search import google_speech_search, my_browser, GOOGLE_URL, open_ik
 from features.text_to_speech import say
 
@@ -76,7 +74,7 @@ def open_git_extensions(project_or_ide=None, ide_class=None, show_error=True):
     hotkey('alt', 'f12')
     sleep(1)
     # focus('- Git ')
-    focus('- Git ', use_custom=True)
+    # focus('- Git ', use_custom=True)
 
 
 def find_all(_words):
@@ -106,9 +104,9 @@ def search_leetcode(w2):
 
 
 def reload_kiara():
-    focus('PyCharm')
+    # focus('PyCharm')
     my_browser.get(GOOGLE_URL)
-    focus_my_browser()
+    # focus_my_browser()
     hotkey('alt', 'f4')
     ctrl('f5')
 
