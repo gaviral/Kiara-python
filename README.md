@@ -1,4 +1,4 @@
-# PaperPy
+# Kiara-Python
 
 Intelligent Assistant using voice commands. Coming soon: Context-awareness
 
